@@ -4,19 +4,33 @@
 
 This [single-page web app](https://n-m-luna.github.io/memory-card-game/) is an implementation of **a card game called Memory**; also known as Concentration, Matching Pairs, Match Match, or Match Up. If you would like, you can read the [wikipedia article](https://en.wikipedia.org/wiki/Concentration_(card_game)) on this game.
 
-This web app was coded with HTML, CSS, and JS. If you are interested in the development of the web app, the [author](https://github.com/N-M-Luna) wrote a dev blog.
+This web app was coded with HTML, CSS, and JS. If you are interested in the development of the web app, the [author](https://github.com/N-M-Luna) wrote a [dev blog](https://n-m-luna.github.io/note-to-self).
 
 ## How to use the web app
 
 The game starts by shuffling and dealing a deck of 16 card (8 pairs of identical cards) face-down on the game board.
 
+<img src="img/screenshot1.png" alt="screenshot" title="Screenshot of the beginning of the game" width="50%" /> 
+
+> Beginning of game
+
 In each turn, the player flips two cards. If they match, the player has solved the pair of cards and they remain facing up. If the cards do not match, they get flipped over again.
 
-The game ends when all the cards have been solved.
+<img src="img/screenshot5.png" alt="screenshot" width="50%">
+
+> The game ends when all the cards have been solved.
 
 In the top left corner, there is a settings button that opens a **deck menu**. This allows the player to change the deck. *The deck library consists of six decks with the following themes: food, camping, animals, science, household, and tech.*
 
+<img src="img/screenshot9.png" alt="screenshot" width="50%">
+
+> The game ends when all the cards have been solved.
+
 In the top right coner, there is a help button that opens a **help screen** with the rules of the game.
+
+<img src="img/screenshot10.png" alt="screenshot" width="50%">
+
+> The game ends when all the cards have been solved.
 
 ## Motivation
 
