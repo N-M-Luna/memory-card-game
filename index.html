@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Meta tags -->
+  <meta charset="utf-8">
+  <meta name="description" content="Implementation of the card game Memory.">
+  <meta name="keywords" content="Card Game">
+  <meta name="author" content="N. M. Luna">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tab Title -->
+  <title> Memory | Card Game </title>
+
+  <!-- Font Awesome cdn-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
+
+  <!-- CSS Style -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body onload="deal('animals')">
+
+  <!-- TITLE BAR -->
+  <!-- At the top of the page, there is the name of the game, a settings button (which toggles the deck menu), and a help button (which will toggle a screen with the rules).  -->
+  <div class="title-bar">
+
+    <!-- Settings Button -->
+    <button class="settings-btn"><span class="fa-solid fa-sliders"></span></button>
+
+    <!-- Help Button -->
+    <button class="help-btn"><span class="fa-solid fa-circle-question"></span></button>
+
+    <!-- Future Feature: User profiles (tracks high scores) -->
+    <!-- <span class="fa-solid fa-user"></span> -->
+
+    <!-- Main and sub titles -->
+    <h1 class="main-title">Memory</h1>
+    <h2 class="sub-title">Card Game</h2>
+
+  </div> <!-- end .title-bar -->
+
+  <!-- Deck menu: toggled by Settings Button -->
+  <div class="settings-screen hidden" id="deck-menu">
+
+    <!-- Button to close the deck menu -->
+    <button class="x-btn"><span class="fa-solid fa-circle-xmark"></span></button>
+
+    <h3 class="settings-title">Choose a new deck</h3>
+
+    <div class="deck-options-row">
+
+
+      <!-- Deck Option 1: Food-->
+      <div class="deck-option">
+
+        <!-- Deck title -->
+        <h4>Food Deck</h4>
+
+        <!-- Button to start a game with food deck -->
+        <button class="deck-btn"><img class="deck-preview" src="img/deck-logo-food.png" alt="food-deck-logo-img"> </button>
+
+      </div> <!-- end Food Deck Option -->
+
+      <!-- Deck Option 2: Camping-->
+      <div class="deck-option">
+
+        <!-- Deck title -->
+        <h4>Camping Deck</h4>
+
+        <!-- Button to start a game with camping deck -->
+        <button class="deck-btn" onclick="deal('camping')"><img class="deck-preview" src="img/deck-logo-camping.png" alt="camping-deck-logo-img"> </button>
+
+      </div> <!-- end Camping Deck Option -->
+
+      <!-- Deck Option 3: Animals-->
+      <div class="deck-option">
+
+        <!-- Deck title -->
+        <h4>Animals Deck</h4>
+
+        <!-- Button to start a game with animals deck -->
+        <button class="deck-btn" onclick="deal('animals')"><img class="deck-preview" src="img/deck-logo-animals.png" alt="animals-deck-logo-img"> </button>
+
+      </div> <!-- end Animals Deck Option -->
+
+    </div> <!-- end .deck-options-row -->
+
+    <div class="deck-options-row">
+
+      <!-- Deck Option 4: Science-->
+      <div class="deck-option">
+
+        <!-- Deck title -->
+        <h4>Science Deck</h4>
+
+        <!-- Button to start a game with science deck -->
+        <button class="deck-btn" onclick="deal('science')"><img class="deck-preview" src="img/deck-logo-science.png" alt="science-deck-logo-img"> </button>
+
+      </div> <!-- end Science Deck Option -->
+
+      <!-- Deck Option 5: Household-->
+      <div class="deck-option">
+
+        <!-- Deck title -->
+        <h4>Household Deck</h4>
+
+        <!-- Button to start a game with household deck -->
+        <button class="deck-btn" onclick="deal('household')"><img class="deck-preview" src="img/deck-logo-household.png" alt="household-deck-logo-img"> </button>
+
+      </div> <!-- end Household Deck Option -->
+
+      <!-- Deck Option 6: Tech Deck-->
+      <div class="deck-option">
+
+        <!-- Deck title -->
+        <h4>Tech Deck</h4>
+
+        <!-- Button to start a game with tech deck -->
+        <button class="deck-btn" onclick="deal('tech')"><img class="deck-preview" src="img/deck-logo-tech.png" alt="tech-deck-logo-img"> </button>
+
+      </div> <!-- end Household Deck Option -->
+    </div> <!-- end .deck-options-row -->
+
+    <!-- Credits for deck logos -->
+    <p>Logos by <a href="https://www.flaticon.com/authors/freepik" target="_blank">Freepik at Flaticon</a>. </p>
+
+
+  </div> <!-- end .settings-screen #deck-menu -->
+
+  <!--Rules: toggled by the Help Button -->
+  <div class="help-screen hidden" id="rules">
+
+    <!-- Instructions on how to play -->
+    <div class="instructions">
+
+      <!-- Button to close the rules -->
+      <button class="x-btn"><span class="fa-solid fa-circle-xmark"></span></button>
+
+      <h3 class="help-title"> How to Play </h3>
+
+      <h4>Goal</h4>
+      <p>To find pairs of matching cards. </p>
+
+      <h4>Gameplay</h4>
+      <p>In each turn, the player clicks on two cards to flip them over.</p>
+      <p>If their faces match, the player has solved the pair and the cards remain face up. </p>
+      <p>If the faces don't match, they get flipped back. </p>
+      <p>The game ends when all cards are face up.</p>
+
+      <h4>Score</h4>
+      <p>The player should aim to solve the game in the least amount of turns possible. </p>
+
+    </div> <!-- end .how-to-play -->
+
+  </div> <!-- end .help-screen #rules -->
+
+  <!--Game Board -->
+  <div class="game-board" id="board">
+
+    <div class="card-row">
+      <!-- card row no. 1 -->
+
+      <!-- Card no. 1 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 1 -->
+      </div> <!-- end card slot no. 1 -->
+
+      <!-- Card no. 2 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid  back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 2 -->
+      </div> <!-- end card slot no. 2 -->
+
+      <!-- Card no. 3 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid  back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 3 -->
+      </div> <!-- end card slot no. 3 -->
+
+      <!-- Card no. 4 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 4 -->
+      </div> <!-- end card slot no. 4 -->
+
+    </div><!-- end card row no. 1 -->
+
+
+    <div class="card-row">
+      <!-- card row no. 2 -->
+
+      <!-- Card no. 5 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 5 -->
+      </div> <!-- end card slot no. 5 -->
+
+      <!-- Card no. 6 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 6 -->
+      </div> <!-- end card slot no. 6 -->
+
+      <!-- Card no. 7 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 7 -->
+      </div> <!-- end card slot no. 7 -->
+
+      <!-- Card no. 8 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 8 -->
+      </div> <!-- end card slot no. 8 -->
+
+    </div><!-- end card row no. 2 -->
+
+    <div class="card-row">
+      <!-- card row no. 3 -->
+
+      <!-- Card no. 9 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 9 -->
+      </div> <!-- end card slot no. 9 -->
+
+      <!-- Card no. 10 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 10 -->
+      </div> <!-- end card slot no. 10 -->
+
+      <!-- Card no. 11 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 11 -->
+      </div> <!-- end card slot no. 11 -->
+
+      <!-- Card no. 12 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 12 -->
+      </div> <!-- end card slot no. 12 -->
+
+    </div><!-- end card row no. 3 -->
+
+    <div class="card-row">
+      <!-- card row no. 4 -->
+
+      <!-- Card no. 13 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 13 -->
+      </div> <!-- end card slot no. 13 -->
+
+      <!-- Card no. 14 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 14 -->
+      </div> <!-- end card slot no. 14 -->
+
+      <!-- Card no. 15 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img">
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 15 -->
+      </div> <!-- end card slot no. 15 -->
+
+      <!-- Card no. 16 -->
+      <div class="card-slot">
+        <div class="card">
+          <div class="card-face card-front">
+            <img class="deck-logo" src="img/deck-logo-food.png" alt="deck-logo-img"> <!-- This is where the player clicks to flip over a card -->
+          </div>
+          <div class="card-face card-back">
+            <span class="fa-solid back-face-placeholder"></span>
+          </div>
+        </div> <!-- end card no. 16 -->
+      </div> <!-- end card slot no. 16 -->
+    </div><!-- end card row no. 4 -->
+
+  </div> <!-- End Game Board -->
+
+  <!-- End-of-Game Screen -->
+  <div class="end-screen hidden">
+
+    <div class="trophy-box">
+
+      <!-- Trophy! -->
+      <div class="trophy">
+        <span class="fa-solid fa-trophy"></span>
+      </div>
+
+      <p> You solved the game in <span class="score"></span> turns! </p>
+
+      <!-- End Options: -->
+
+      <!-- Option to play another game (href="#") -->
+      <div class="end-option">
+      <span class="fa-solid fa-arrow-rotate-right"></span>
+      <p>Play.</p>
+    </div> <!-- End end-option no. 1. -->
+
+        <!-- Option to rate the app -->
+        <div class="end-option">
+        <span class="fa-solid fa-heart"></span>
+        <p>Rate.</p>
+      </div> <!-- End end-option no. 2. -->
+
+      <!-- Option to share the score -->
+      <div class="end-option">
+        <span class="fa-solid fa-share-nodes"></span>
+        <p>Share.</p>
+      </div> <!-- end end-option no. 3. -->
+
+    </div><!-- End Trophy box. -->
+
+  </div> <!-- End end-of-game-screen. -->
+
+
+  <!-- Footer -->
+  <footer>
+
+    <!-- Author's GitHub -->
+    <p> Created with <span class="fa-solid fa-heart"></span> by <a href="https://n-m-luna.github.io/" target="_blank">N. M. Luna</a>. </p>
+
+    <!-- Author's social info -->
+    <p class="social-icons">
+      <a href="https://twitter.com/loquacious_luna" target="_blank"><span class="fa-brands fa-twitter-square"></span></a>
+      <a href="https://www.linkedin.com/in/nathalie-luna-aa0a12186/" target="_blank"><span class="fa-brands fa-linkedin"></span></a>
+      <a href="https://github.com/N-M-Luna" target="_blank"><span class="fa-brands fa-github-square"></span></a>
+    </p>
+
+  </footer>
+
+  <!-- Game Logic -->
+  <script src="game.js" charset="utf-8"></script>
+
+</body>
+
+</html>

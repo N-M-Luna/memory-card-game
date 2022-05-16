@@ -1,0 +1,280 @@
+/*CSS file for the Memory Card Game
+
+Color Scheme:
+
+AliceBlue #f0f8ff
+DarkCyan #008b8b
+Gray #808080
+
+
+Sections:
+
+Document-wide Elements
+Title Bar
+Help and Settings Screens
+Game Board Elements
+End-Of-Game Screen Elements
+Footer Elements
+
+*/
+
+/* ----------------------------------------- Document-wide Elements */
+
+body {
+  font-family: verdana, tahoma;
+  margin: 0;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ----------------------------------------- Title Bar */
+
+.title-bar {
+  margin: 0 0 25px;
+}
+
+.main-title {
+  color: DarkCyan;
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+
+.sub-title {
+  color: gray;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.help-btn, .settings-btn {
+  background-color: inherit;
+  border: none;
+  color: gray;
+  font-size: 1.5rem;
+  margin-top: 30px;
+}
+
+.help-btn:hover, .settings-btn:hover {
+  color: darkCyan;
+}
+
+.help-btn {
+  float: right;
+  margin-right: 10%;
+}
+
+.settings-btn {
+  float: left;
+  margin-left: 10%;
+}
+
+/* -------------------------------- Help and Settings Screens */
+
+.settings-title, .help-title {
+  color: darkCyan;
+  padding-top: 30px;
+}
+
+.x-btn {
+  background-color: transparent;
+  border: none;
+  color: gray;
+  font-size: 1.75rem;
+}
+
+.x-btn:hover {
+  color: darkcyan;
+}
+
+/* Just Help Screen Elements */
+
+.help-screen {
+  background-color: AliceBlue;
+  color: gray;
+  width: 100%;
+}
+
+.instructions {
+  margin-left: 10%;
+  padding: 50px 0;
+  width: 80%;
+}
+
+/* Just Settings Screen Elements */
+
+.deck-btn {
+  background-color: gray;
+  border: none;
+  display: inline-block;
+  height: 100px;
+  margin-bottom: 30px;
+  width: 100px;
+}
+
+.deck-btn:hover {
+  background-color: darkcyan;
+}
+
+.deck-option {
+  display: inline-block;
+  width: 30%;
+}
+
+@media screen and (max-width: 500px) {
+  .deck-option {
+    display: block;
+    margin-left: 35%;
+  }
+}
+
+.deck-preview {
+  margin: 5%;
+  width: 90%;
+}
+
+.settings-screen {
+  background-color: AliceBlue;
+  color: gray;
+  padding: 5% 0;
+  width: 100%;
+}
+
+.settings-screen a {
+  color: darkcyan;
+}
+
+.settings-screen a:hover {
+  color: grey;
+}
+
+/* ----------------------------------------- Game Board Elements */
+
+.card {
+  height: 100%;
+  position: relative;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  width: 100%;
+}
+
+.card-back {
+  background-color: aliceblue;
+  border: solid 1px DarkCyan;
+  color: darkcyan;
+  font-size: 3rem;
+  margin: -1px;
+  transform: rotateY(180deg);
+}
+
+@media only screen and (max-width: 550px) {
+  .card-back {
+    font-size: 2.25rem;
+  }
+}
+
+.card-face {
+  backface-visibility: hidden;
+  height: 100%;
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+  width: 100%;
+}
+
+.card-front {
+  background-color: darkcyan;
+  color: aliceblue;
+}
+
+.card-slot {
+  display: inline-block;
+  height: 100px;
+  perspective: 1000px;
+  width: 100px;
+}
+
+@media only screen and (max-width: 550px) {
+  /* Make the cards fit on screens smaller than 550px wide. */
+  .card-slot {
+    height: 75px;
+    width: 75px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  /* Make the cards fit on screens smaller than 400px wide. */
+  .card-slot {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+/* .card-row doesn't need any rules. The .card-row divs were added so that the board stays with four rows or four cards. */
+
+.deck-logo {
+  margin: 5%;
+  width: 90%;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.game-board {
+  margin: 5% 10%;
+}
+
+/* ----------------------------------------- End-Of-Game Screen Elements */
+
+.end-option {
+  display: inline-block;
+  margin-top: 20px;
+  width: 20%;
+}
+
+.end-option:hover {
+  color: darkCyan;
+}
+
+.end-screen {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.trophy {
+  color: darkCyan;
+  font-size: 3rem;
+}
+
+.trophy-box {
+  background-color: aliceblue;
+  color: gray;
+  margin: 100px auto;
+  padding: 50px 0;
+  width: 80%;
+}
+
+/* ----------------------------------------- Footer Elements */
+
+footer {
+  background-color: darkcyan;
+  color: white;
+  padding: 5% 0;
+  margin: 5% 10%;
+}
+
+footer a {
+  color: aliceblue;
+  text-decoration: underline;
+}
+
+.social-icons {
+  font-size: 1.5rem;
+}
